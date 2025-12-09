@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "lzstring/version"
 require "lzstring/compress"
 require "lzstring/decompress"
@@ -25,17 +27,19 @@ module LZString
 
       # Use 16 bits per character for output
       _compress(input, 16) do |code|
-        # Convert integer code to character with fallback for invalid codes
+        begin
+          # Convert integer code to character with fallback for invalid codes
 
-        if code.between?(0, 0x10FFFF)
-          code.chr(Encoding::UTF_8)
-        else
-          # Fallback for invalid code points
+          if code.between?(0, 0x10FFFF)
+            code.chr(Encoding::UTF_8)
+          else
+            # Fallback for invalid code points
+            "?"
+          end
+        rescue RangeError, ArgumentError
+          # Fallback to safe character if we can't represent this code point
           "?"
         end
-      rescue RangeError, ArgumentError
-        # Fallback to safe character if we can't represent this code point
-        "?"
       end
     rescue
       # Return empty string on error, matching JavaScript's behavior

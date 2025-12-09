@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 # Test class for LZString library testing
@@ -107,9 +109,11 @@ class LZStringTest < Minitest::Test
   def test_binary_data
     # Test with binary data
     binary_data = (0..20).map do |n|
-      n.chr
-    rescue
-      "?"
+      begin
+        n.chr
+      rescue
+        "?"
+      end
     end.join
     compressed = LZString.compress(binary_data)
     decompressed = LZString.decompress(compressed)

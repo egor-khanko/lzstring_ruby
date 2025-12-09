@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
                        "for multiple encodings (base64, URI, UTF16)"
   spec.homepage      = "https://github.com/kiwamizamurai/lzstring_ruby"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   # Development dependencies
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rubocop", "~> 1.50"
-  spec.add_development_dependency "simplecov", "~> 0.21.2"
+  spec.add_development_dependency "rubocop", "1.12.1"
+  spec.add_development_dependency "simplecov", "0.18.5"
   spec.add_development_dependency "yard", "~> 0.9.28"
 end

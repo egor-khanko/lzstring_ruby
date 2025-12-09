@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LZString
   # Module for Uint8Array encoding/decoding
   module Uint8Array
@@ -91,13 +93,15 @@ module LZString
 
       # Convert each character to a pair of bytes
       string.each_char.with_index do |char, i|
-        code = char.ord
-        result[i * 2] = (code >> 8) & 0xFF # High byte
-        result[(i * 2) + 1] = code & 0xFF # Low byte
-      rescue
-        # Use fallback for problematic characters
-        result[i * 2] = 0
-        result[(i * 2) + 1] = "?".ord
+        begin
+          code = char.ord
+          result[i * 2] = (code >> 8) & 0xFF # High byte
+          result[(i * 2) + 1] = code & 0xFF # Low byte
+        rescue
+          # Use fallback for problematic characters
+          result[i * 2] = 0
+          result[(i * 2) + 1] = "?".ord
+        end
       end
 
       result
